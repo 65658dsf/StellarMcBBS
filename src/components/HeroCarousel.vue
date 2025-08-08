@@ -3,8 +3,10 @@
     <div id="carousel" class="h-full">
       <!-- 轮播项1 -->
       <div
-        v-show="currentSlide === 0"
-        class="carousel-item absolute inset-0 opacity-100 transition-opacity duration-1000"
+        :class="[
+          'carousel-item absolute inset-0 transition-opacity duration-1000',
+          currentSlide === 0 ? 'opacity-100' : 'opacity-0',
+        ]"
       >
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 z-10"></div>
         <img
@@ -27,7 +29,7 @@
                 href="#contact"
                 class="px-8 py-3 bg-accent hover:bg-accent/90 text-white font-medium rounded-lg transition-all transform hover:scale-105 shadow-lg"
               >
-                <i class="fa fa-comments mr-2"></i>加入交流群
+                <i class="fa fa-comments-o mr-2"></i>加入交流群
               </a>
               <a
                 href="#apply"
@@ -42,8 +44,10 @@
 
       <!-- 轮播项2 -->
       <div
-        v-show="currentSlide === 1"
-        class="carousel-item absolute inset-0 opacity-100 transition-opacity duration-1000"
+        :class="[
+          'carousel-item absolute inset-0 transition-opacity duration-1000',
+          currentSlide === 1 ? 'opacity-100' : 'opacity-0',
+        ]"
       >
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 z-10"></div>
         <img
@@ -72,7 +76,7 @@
                 href="#stats"
                 class="px-8 py-3 bg-transparent hover:bg-white/10 text-white font-medium rounded-lg border border-white transition-all transform hover:scale-105"
               >
-                <i class="fa fa-bar-chart mr-2"></i>查看社区数据
+                <i class="fa fa-bar-chart-o mr-2"></i>查看社区数据
               </a>
             </div>
           </div>

@@ -8,7 +8,7 @@ import { RouterView } from 'vue-router'
 
 <style>
 /* 全局样式 */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('@/assets/fonts/Inter.css');
 
 * {
   margin: 0;
@@ -19,8 +19,9 @@ import { RouterView } from 'vue-router'
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background-color: #f9fafb;
-  color: #1D2129;
+  color: #1d2129;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 #app {
@@ -29,16 +30,16 @@ body {
 
 /* 颜色变量 */
 :root {
-  --color-primary: #165DFF;
-  --color-secondary: #36BFFA;
-  --color-accent: #FF7D00;
-  --color-success: #00B42A;
-  --color-warning: #FF7D00;
-  --color-danger: #F53F3F;
-  --color-dark: #1D2129;
-  --color-dark-2: #4E5969;
-  --color-light-1: #F2F3F5;
-  --color-light-2: #E5E6EB;
+  --color-primary: #165dff;
+  --color-secondary: #36bffa;
+  --color-accent: #ff7d00;
+  --color-success: #00b42a;
+  --color-warning: #ff7d00;
+  --color-danger: #f53f3f;
+  --color-dark: #1d2129;
+  --color-dark-2: #4e5969;
+  --color-light-1: #f2f3f5;
+  --color-light-2: #e5e6eb;
 }
 
 /* 工具类 */
@@ -98,5 +99,54 @@ a {
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* 自定义工具类 */
+@layer utilities {
+  .content-auto {
+    content-visibility: auto;
+  }
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  .bg-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .transition-transform {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+}
+
+/* 字体和背景修复 */
+.font-sans {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb;
+}
+
+.text-dark {
+  color: #1d2129;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+/* 响应式字体修复 */
+.text-\[clamp\(2rem\,5vw\,4rem\)\] {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.text-\[clamp\(1rem\,2vw\,1\.25rem\)\] {
+  font-size: clamp(1rem, 2vw, 1.25rem);
 }
 </style>

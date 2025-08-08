@@ -1,6 +1,6 @@
 <template>
   <section id="servers" class="py-16 bg-light-1">
-    <div class="container mx-auto px-4">
+    <div class="max-w-7xl mx-auto px-4">
       <div class="text-center mb-12">
         <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">推荐服务器</h2>
         <p class="text-dark-2 max-w-2xl mx-auto">精选优质Minecraft服务器，总有一款适合你</p>
@@ -38,25 +38,27 @@
       </div>
 
       <!-- 服务器卡片网格 -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div class="flex flex-wrap gap-6 justify-start items-start">
         <div
           v-for="server in filteredServers"
           :key="server.id"
-          class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+          class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 min-w-[320px] max-w-md flex-shrink-0"
         >
           <div class="p-5">
-            <div class="flex items-start gap-4">
+            <div class="flex items-start gap-4 min-w-0">
               <img
-                :src="server.icon"
+                :src="getServerIcon(server)"
                 :alt="server.name + '服务器图标'"
-                class="w-16 h-16 rounded-lg object-cover border border-light-2"
+                @error="handleImageError(server)"
+                class="w-16 h-16 rounded-lg object-cover border border-light-2 flex-shrink-0"
               />
-              <div class="flex-1">
+              <div class="flex-1 min-w-0">
                 <h3 class="font-bold text-lg mb-1">{{ server.name }}</h3>
-                <p class="text-dark-2 text-sm mb-2 flex items-center">
-                  <i class="fa fa-map-marker mr-1"></i> {{ server.address }}
+                <p class="text-dark-2 text-sm mb-2 flex items-center break-all">
+                  <i class="fa fa-map-marker mr-1 flex-shrink-0"></i> 
+                  <span class="whitespace-normal">{{ server.address }}</span>
                 </p>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 flex-wrap">
                   <span
                     :class="[
                       'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
@@ -68,9 +70,10 @@
                     ></i>
                     {{ server.online ? '在线' : '离线' }}
                   </span>
-                  <span class="text-sm text-dark-2"
-                    >{{ server.players }}/{{ server.maxPlayers }} 玩家</span
-                  >
+                  <span :ip="server.address" class="text-sm text-dark-2">查询中</span>
+                   <span :ping="server.address" class="text-sm text-dark-2 flex items-center">
+                     <i class="fa fa-wifi mr-1"></i> 查询中
+                   </span>
                 </div>
               </div>
             </div>
@@ -107,7 +110,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+
+const emit = defineEmits(['servers-loaded'])
 
 interface Server {
   id: number
@@ -121,6 +126,10 @@ interface Server {
   type: string
   description: string
   category: string
+  ping?: number
+  city?: string | null
+  mod?: string
+  motd?: string
 }
 
 const categories = [
@@ -134,89 +143,116 @@ const categories = [
 const selectedCategory = ref('all')
 const searchQuery = ref('')
 
-const servers = ref<Server[]>([
-  {
-    id: 1,
-    name: '恒星主城',
-    address: 'mc.starmc.com',
-    icon: 'https://picsum.photos/id/237/80/80',
-    online: true,
-    players: 128,
-    maxPlayers: 200,
-    version: '1.20.1',
-    type: '生存/创造',
-    description: '官方主城服务器，包含生存、创造和小游戏模式，适合各类玩家体验。',
-    category: 'survival',
-  },
-  {
-    id: 2,
-    name: '幻想RPG',
-    address: 'rpg.fantasy-mc.com',
-    icon: 'https://picsum.photos/id/239/80/80',
-    online: true,
-    players: 87,
-    maxPlayers: 150,
-    version: '1.19.2',
-    type: 'RPG/冒险',
-    description: '大型角色扮演服务器，丰富的剧情任务和职业系统，沉浸式游戏体验。',
-    category: 'rpg',
-  },
-  {
-    id: 3,
-    name: '像素创造',
-    address: 'build.pixelmc.net',
-    icon: 'https://picsum.photos/id/240/80/80',
-    online: true,
-    players: 45,
-    maxPlayers: 100,
-    version: '1.20.1',
-    type: '创造/建筑',
-    description: '专注于建筑创造的服务器，拥有多种建筑工具和材质包，展示你的创意。',
-    category: 'creative',
-  },
-  {
-    id: 4,
-    name: '极限生存',
-    address: 'survival.extrememc.com',
-    icon: 'https://picsum.photos/id/241/80/80',
-    online: false,
-    players: 0,
-    maxPlayers: 80,
-    version: '1.20.1',
-    type: '生存',
-    description: '高难度生存服务器，挑战你的生存技能，适合寻求刺激的玩家。',
-    category: 'survival',
-  },
-  {
-    id: 5,
-    name: '迷你游戏中心',
-    address: 'minigames.mcfun.net',
-    icon: 'https://picsum.photos/id/242/80/80',
-    online: true,
-    players: 67,
-    maxPlayers: 120,
-    version: '1.19.4',
-    type: '迷你游戏',
-    description: '多种迷你游戏集合，包括起床战争、空岛战争等，与好友一起畅玩。',
-    category: 'minigames',
-  },
-  {
-    id: 6,
-    name: '魔法世界',
-    address: 'magic.magicalmc.com',
-    icon: 'https://picsum.photos/id/243/80/80',
-    online: true,
-    players: 92,
-    maxPlayers: 150,
-    version: '1.19.2',
-    type: 'RPG/魔法',
-    description: '魔法主题RPG服务器，学习魔法技能，探索神秘世界，体验不一样的冒险。',
-    category: 'rpg',
-  },
-])
+const servers = ref<Server[]>([])
 
 const selectCategory = (categoryId: string) => {
   selectedCategory.value = categoryId
+}
+
+const getServerIcon = (server: Server) => {
+  // 优先使用本地favicon
+  if (server.icon && server.icon !== '') {
+    return server.icon
+  }
+  // 其次使用API返回的logo
+  if (server.logo && server.logo !== '') {
+    return server.logo
+  }
+  // 默认图标
+  return '/src/assets/favicon.ico'
+}
+
+const handleImageError = (server: Server) => {
+  // 图片加载失败时，尝试使用API logo
+  return (event: Event) => {
+    const imgElement = event.target as HTMLImageElement
+    if (imgElement && server.logo && server.logo !== '') {
+      imgElement.src = server.logo
+    } else {
+      imgElement.src = '/src/assets/favicon.ico'
+    }
+  }
+}
+
+const loadServers = async () => {
+  try {
+    // 1. 先获取本地JSON的基础信息
+    const response = await fetch('/src/assets/servers.json')
+    const localServers = await response.json()
+    
+    // 2. 创建服务器数据
+    servers.value = localServers.map((server: any, index: number) => ({
+      id: index + 1,
+      name: server.name,
+      address: `${server.ip}:${server.port}`,
+      icon: server.favicon || '',
+      logo: '',
+      online: false,
+      players: 0,
+      maxPlayers: server.max || 100,
+      version: server.version,
+      type: server.type,
+      description: server.description || server.motd || '',
+      category: server.type?.toLowerCase() || 'survival',
+      ping: 0,
+      city: null,
+      mod: server.type,
+      motd: server.motd || server.description
+    }))
+    
+    // 3. 使用JS脚本获取实时数据
+    setTimeout(() => {
+      updateServerDataWithJS()
+    }, 1000)
+    
+    // 立即通知父组件初始数据已加载
+    emit('servers-loaded', servers.value)
+    
+  } catch (error) {
+    console.error('加载服务器数据失败:', error)
+  }
+}
+
+const updateServerDataWithJS = async () => {
+  try {
+    // 并行获取所有服务器数据
+    const promises = servers.value.map(async (server, index) => {
+      try {
+        const apiUrl = `https://list.mczfw.cn/api/${server.address}`
+        const response = await fetch(apiUrl)
+        
+        if (response.ok) {
+          const data = await response.json()
+          
+          // 更新服务器数据 - 有延迟数据就算在线
+          const isOnline = data.ping !== undefined && data.ping !== null && data.motd !== "（此服务器离线或者服务器不存在）"
+          return {
+            ...server,
+            online: isOnline,
+            players: data.p || 0,
+            maxPlayers: data.mp || server.maxPlayers,
+            ping: data.ping || 0,
+            city: data.city || null,
+            description: data.motd || server.description,
+            motd: data.motd || server.motd
+          }
+        }
+      } catch (error) {
+        console.error(`获取服务器 ${server.name} 数据失败:`, error)
+      }
+      return server
+    })
+    
+    // 等待所有数据更新完成
+    const updatedServers = await Promise.all(promises)
+    servers.value = updatedServers
+    
+    // 通知父组件数据已更新
+    emit('servers-loaded', servers.value)
+    
+  } catch (error) {
+    console.error('更新服务器数据失败:', error)
+  }
 }
 
 const filteredServers = computed(() => {
@@ -237,6 +273,10 @@ const filteredServers = computed(() => {
   }
 
   return result
+})
+
+onMounted(() => {
+  loadServers()
 })
 </script>
 

@@ -77,31 +77,37 @@ pnpm lint
 ## 组件说明
 
 ### AppNavbar.vue
+
 - 响应式导航栏
 - 毛玻璃效果背景
 - 移动端汉堡菜单
 
 ### HeroCarousel.vue
+
 - 自动轮播展示
 - 手动控制按钮
 - 平滑过渡动画
 
 ### CommunityStats.vue
+
 - 社区数据统计
 - 图表可视化
 - 实时数据展示
 
 ### ServerList.vue
+
 - 服务器列表展示
 - 搜索和筛选功能
 - 状态标签显示
 
 ### ServerApply.vue
+
 - 入驻申请表单
 - 表单验证
 - 入驻须知说明
 
 ### ContactSection.vue
+
 - 联系方式展示
 - 社交媒体链接
 - 常见问题解答
@@ -109,6 +115,7 @@ pnpm lint
 ## 自定义配置
 
 ### 颜色主题
+
 在 `index.html` 中可以修改Tailwind配置：
 
 ```javascript
@@ -120,16 +127,18 @@ tailwind.config = {
         secondary: '#36BFFA',
         accent: '#FF7D00',
         // ...其他颜色
-      }
-    }
-  }
+      },
+    },
+  },
 }
 ```
 
 ### 服务器数据
+
 修改 `ServerList.vue` 中的 `servers` 数据数组来更新服务器列表。
 
 ### 社区统计
+
 在 `CommunityStats.vue` 中更新统计数据和图表配置。
 
 ## 部署

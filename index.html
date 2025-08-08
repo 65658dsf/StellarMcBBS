@@ -1,25 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StellarMcBBS - 恒星穿透社区</title>
-    <meta name="description" content="恒星穿透社区 - 专业的Minecraft服务器交流平台">
-    <meta name="keywords" content="Minecraft, 服务器, 社区, StellarMcBBS, 恒星穿透">
-    
+    <meta name="description" content="恒星穿透社区 - 专业的Minecraft服务器交流平台" />
+    <meta name="keywords" content="Minecraft, 服务器, 社区, StellarMcBBS, 恒星穿透" />
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
+    <!-- Font Awesome 4.7.0 (匹配原始样式) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+    />
+
     <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     <!-- Custom Tailwind Config -->
     <script>
       tailwind.config = {
@@ -39,16 +42,16 @@
             },
             backdropBlur: {
               xs: '2px',
-            }
-          }
-        }
+            },
+          },
+        },
       }
     </script>
   </head>
-  <body>
+  <body class="font-sans bg-gray-50 text-dark overflow-x-hidden">
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
-    
+
     <!-- AOS Animation -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </body>

@@ -1,7 +1,7 @@
 <template>
   <section id="apply" class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12">
           <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">服务器入驻申请</h2>
           <p class="text-dark-2 max-w-2xl mx-auto">
@@ -130,9 +130,9 @@
               <div class="flex items-start gap-3">
                 <i class="fa fa-check-circle text-success mt-1"></i>
                 <div>
-                  <h4 class="font-medium text-dark">审核流程</h4>
+                  <h4 class="font-medium text-dark">提交方式</h4>
                   <p class="text-sm">
-                    我们会在1-3个工作日内完成审核，并通过提供的联系方式通知结果。
+                    点击提交后会自动跳转到GitHub Issues页面，请在新页面中完成提交。
                   </p>
                 </div>
               </div>
@@ -146,10 +146,15 @@
               </div>
 
               <div class="mt-6 p-4 bg-primary/10 rounded-lg">
-                <h4 class="font-medium text-dark mb-2">联系方式</h4>
-                <p class="text-sm">如有疑问，请联系管理员：</p>
-                <p class="text-sm font-medium">QQ群: 123456789</p>
-                <p class="text-sm font-medium">邮箱: admin@starmc.com</p>
+                <h4 class="font-medium text-dark mb-2">提交说明</h4>
+                <p class="text-sm">点击"提交申请"按钮后，系统会自动生成GitHub Issue：</p>
+                <ul class="text-sm mt-2 space-y-1">
+                  <li>• 填写表单后点击提交</li>
+                  <li>• 自动跳转到GitHub Issues页面</li>
+                  <li>• 确认信息无误后提交Issue</li>
+                  <li>• 等待管理员审核（1-3个工作日）</li>
+                </ul>
+                <p class="text-sm mt-2">需要GitHub账号才能提交，没有账号请先注册。</p>
               </div>
             </div>
           </div>
@@ -183,18 +188,30 @@ const form = ref<ApplicationForm>({
 const isSubmitting = ref(false)
 const submitStatus = ref<{ type: 'success' | 'error'; message: string } | null>(null)
 
-const submitApplication = async () => {
+const submitApplication = () => {
   isSubmitting.value = true
-  submitStatus.value = null
 
   try {
-    // 模拟API调用
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    // 生成GitHub Issue内容
+    let issueBody = `**服务器名称**: ${form.value.name}\n`
+    issueBody += `**服务器地址**: ${form.value.address}\n`
+    issueBody += `**版本**: ${form.value.version}\n`
+    issueBody += `**类型**: ${form.value.type}\n`
+    issueBody += `**服务器简介**: ${form.value.description}\n`
+    issueBody += `**联系方式**: ${form.value.contact}\n`
 
-    // 模拟成功提交
+    // 构建GitHub Issue URL - 使用实际仓库地址
+    const githubRepo = '65658dsf/StellarMcBBS'
+    const issueTitle = `[入驻] ${form.value.name}`
+    const issueUrl = `https://github.com/${githubRepo}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}&labels=server-submission`
+
+    // 打开GitHub Issue页面
+    window.open(issueUrl, '_blank')
+
+    // 显示成功消息
     submitStatus.value = {
       type: 'success',
-      message: '申请提交成功！我们会在1-3个工作日内完成审核并联系您。',
+      message: '正在跳转到GitHub Issues页面，请在新页面中提交申请。',
     }
 
     // 清空表单
@@ -206,10 +223,10 @@ const submitApplication = async () => {
       description: '',
       contact: '',
     }
-  } catch {
+  } catch (error) {
     submitStatus.value = {
       type: 'error',
-      message: '提交失败，请稍后重试或联系管理员。',
+      message: '创建申请链接失败，请手动前往GitHub提交。',
     }
   } finally {
     isSubmitting.value = false

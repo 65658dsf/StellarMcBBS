@@ -8,8 +8,31 @@ import ServerApply from '@/components/ServerApply.vue'
 import ContactSection from '@/components/ContactSection.vue'
 import Footer from '@/components/Footer.vue'
 
-const servers = ref([])
+interface Server {
+  id: number
+  name: string
+  address: string
+  icon: string
+  logo?: string
+  online: boolean
+  players: number
+  maxPlayers: number
+  version: string
+  type: string
+  description: string
+  category: string
+  ping?: number
+  city?: string | null
+  mod?: string
+  motd?: string
+}
+
+const servers = ref<Server[]>([])
 provide('servers', servers)
+
+const handleServersLoaded = (data: Server[]) => {
+  servers.value = data
+}
 </script>
 
 <template>
@@ -24,7 +47,7 @@ provide('servers', servers)
     <CommunityStats :servers="servers" />
 
     <!-- 服务器列表 -->
-    <ServerList @servers-loaded="(data) => servers.value = data" />
+    <ServerList @servers-loaded="handleServersLoaded" />
 
     <!-- 服务器入驻 -->
     <ServerApply />

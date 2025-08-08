@@ -119,6 +119,7 @@ interface Server {
   name: string
   address: string
   icon: string
+  logo?: string
   online: boolean
   players: number
   maxPlayers: number
@@ -150,25 +151,23 @@ const selectCategory = (categoryId: string) => {
 }
 
 const getServerIcon = (server: Server) => {
-  // 优先使用本地favicon
-  if (server.icon && server.icon !== '') {
-    return server.icon
-  }
-  // 其次使用API返回的logo
+  // 优先使用API返回的logo
   if (server.logo && server.logo !== '') {
     return server.logo
+  }
+  // 其次使用本地favicon
+  if (server.icon && server.icon !== '') {
+    return server.icon
   }
   // 默认图标
   return '/src/assets/favicon.ico'
 }
 
 const handleImageError = (server: Server) => {
-  // 图片加载失败时，尝试使用API logo
+  // 图片加载失败时，回退到默认图标
   return (event: Event) => {
     const imgElement = event.target as HTMLImageElement
-    if (imgElement && server.logo && server.logo !== '') {
-      imgElement.src = server.logo
-    } else {
+    if (imgElement) {
       imgElement.src = '/src/assets/favicon.ico'
     }
   }

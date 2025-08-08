@@ -1,0 +1,1244 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>恒星MC社区 - 我的世界服务器交流平台</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <!-- 引入Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+
+    <!-- Tailwind配置 -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#165DFF',
+              secondary: '#36BFFA',
+              accent: '#FF7D00',
+              success: '#00B42A',
+              warning: '#FF7D00',
+              danger: '#F53F3F',
+              dark: '#1D2129',
+              'dark-2': '#4E5969',
+              'light-1': '#F2F3F5',
+              'light-2': '#E5E6EB',
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
+
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .content-auto {
+          content-visibility: auto;
+        }
+        .text-shadow {
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .text-shadow-lg {
+          text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .bg-glass {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+        }
+        .transition-transform {
+          transition-property: transform;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-duration: 300ms;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="font-sans bg-gray-50 text-dark overflow-x-hidden">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      <nav
+        class="container mx-auto px-4 py-3 flex items-center justify-between bg-glass text-white"
+      >
+        <div class="flex items-center space-x-2">
+          <img
+            src="https://picsum.photos/40/40"
+            alt="恒星MC社区Logo"
+            class="w-10 h-10 rounded-lg"
+          />
+          <h1 class="text-xl font-bold tracking-tight">恒星MC社区</h1>
+        </div>
+
+        <!-- 桌面导航 -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#servers" class="hover:text-accent transition-colors">服务器列表</a>
+          <a href="#stats" class="hover:text-accent transition-colors">社区统计</a>
+          <a href="#apply" class="hover:text-accent transition-colors">服务器入驻</a>
+          <a href="#contact" class="hover:text-accent transition-colors">联系我们</a>
+        </div>
+
+        <!-- 移动端菜单按钮 -->
+        <button id="menu-toggle" class="md:hidden text-white text-xl">
+          <i class="fa fa-bars"></i>
+        </button>
+      </nav>
+
+      <!-- 移动端导航菜单 -->
+      <div id="mobile-menu" class="hidden md:hidden bg-dark-2 text-white">
+        <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+          <a href="#servers" class="py-2 hover:text-accent transition-colors">服务器列表</a>
+          <a href="#stats" class="py-2 hover:text-accent transition-colors">社区统计</a>
+          <a href="#apply" class="py-2 hover:text-accent transition-colors">服务器入驻</a>
+          <a href="#contact" class="py-2 hover:text-accent transition-colors">联系我们</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- 轮播Banner -->
+      <section class="relative h-screen overflow-hidden">
+        <div id="carousel" class="h-full">
+          <!-- 轮播项1 -->
+          <div class="carousel-item absolute inset-0 opacity-100 transition-opacity duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 z-10"></div>
+            <img
+              src="https://picsum.photos/id/137/1920/1080"
+              alt="我的世界服务器风景"
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 z-20 flex items-center justify-center text-center px-4">
+              <div class="max-w-3xl transform transition-transform duration-1000">
+                <h1 class="text-[clamp(2rem,5vw,4rem)] font-bold text-white mb-6 text-shadow-lg">
+                  恒星MC社区
+                </h1>
+                <p
+                  class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-8 text-shadow max-w-2xl mx-auto"
+                >
+                  汇聚优质Minecraft服务器，打造友好的我的世界玩家社区
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                  <a
+                    href="#contact"
+                    class="px-8 py-3 bg-accent hover:bg-accent/90 text-white font-medium rounded-lg transition-all transform hover:scale-105 shadow-lg"
+                  >
+                    <i class="fa fa-comments mr-2"></i>加入交流群
+                  </a>
+                  <a
+                    href="#apply"
+                    class="px-8 py-3 bg-transparent hover:bg-white/10 text-white font-medium rounded-lg border border-white transition-all transform hover:scale-105"
+                  >
+                    <i class="fa fa-server mr-2"></i>服务器入驻
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 轮播项2 -->
+          <div class="carousel-item absolute inset-0 opacity-0 transition-opacity duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 z-10"></div>
+            <img
+              src="https://picsum.photos/id/169/1920/1080"
+              alt="我的世界游戏截图"
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 z-20 flex items-center justify-center text-center px-4">
+              <div class="max-w-3xl">
+                <h1 class="text-[clamp(2rem,5vw,4rem)] font-bold text-white mb-6 text-shadow-lg">
+                  发现精彩服务器
+                </h1>
+                <p
+                  class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-8 text-shadow max-w-2xl mx-auto"
+                >
+                  从生存到创造，从迷你游戏到大型RPG，找到适合你的服务器
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                  <a
+                    href="#servers"
+                    class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg transition-all transform hover:scale-105 shadow-lg"
+                  >
+                    <i class="fa fa-search mr-2"></i>浏览服务器
+                  </a>
+                  <a
+                    href="#stats"
+                    class="px-8 py-3 bg-transparent hover:bg-white/10 text-white font-medium rounded-lg border border-white transition-all transform hover:scale-105"
+                  >
+                    <i class="fa fa-bar-chart mr-2"></i>查看社区数据
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 轮播控制 -->
+        <div class="absolute bottom-8 left-0 right-0 z-30 flex justify-center space-x-3">
+          <button
+            class="carousel-dot w-3 h-3 rounded-full bg-white opacity-100 transition-all"
+          ></button>
+          <button
+            class="carousel-dot w-3 h-3 rounded-full bg-white opacity-50 transition-all"
+          ></button>
+        </div>
+
+        <!-- 下滑提示 -->
+        <div
+          class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 animate-bounce hidden md:block"
+        >
+          <a href="#stats" class="text-white/80 hover:text-white">
+            <i class="fa fa-angle-down text-3xl"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- 统计卡片组 -->
+      <section id="stats" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+          <div class="text-center mb-12">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">社区数据统计</h2>
+            <p class="text-dark-2 max-w-2xl mx-auto">
+              实时展示恒星MC社区的服务器和玩家数据，见证社区的成长与活力
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- 总服务器数 -->
+            <div
+              class="bg-light-1 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow transform hover:-translate-y-1 duration-300"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-dark-2">总服务器数</h3>
+                <div
+                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                >
+                  <i class="fa fa-server"></i>
+                </div>
+              </div>
+              <div class="flex items-end">
+                <span class="text-4xl font-bold text-dark" id="total-servers">24</span>
+                <span class="text-success ml-2 flex items-center text-sm">
+                  <i class="fa fa-arrow-up mr-1"></i>12%
+                </span>
+              </div>
+              <p class="text-dark-2/80 text-sm mt-2">较上月增长</p>
+            </div>
+
+            <!-- 在线服务器 -->
+            <div
+              class="bg-light-1 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow transform hover:-translate-y-1 duration-300"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-dark-2">在线服务器</h3>
+                <div
+                  class="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center text-success"
+                >
+                  <i class="fa fa-check-circle"></i>
+                </div>
+              </div>
+              <div class="flex items-end">
+                <span class="text-4xl font-bold text-dark" id="online-servers">18</span>
+                <span class="text-dark-2 ml-2 text-sm"> 占比75% </span>
+              </div>
+              <p class="text-dark-2/80 text-sm mt-2">当前在线状态</p>
+            </div>
+
+            <!-- 总在线人数 -->
+            <div
+              class="bg-light-1 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow transform hover:-translate-y-1 duration-300"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-dark-2">总在线人数</h3>
+                <div
+                  class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"
+                >
+                  <i class="fa fa-users"></i>
+                </div>
+              </div>
+              <div class="flex items-end">
+                <span class="text-4xl font-bold text-dark" id="total-players">1,254</span>
+                <span class="text-success ml-2 flex items-center text-sm">
+                  <i class="fa fa-arrow-up mr-1"></i>8%
+                </span>
+              </div>
+              <p class="text-dark-2/80 text-sm mt-2">较昨日增长</p>
+            </div>
+          </div>
+
+          <!-- 活跃度图表 -->
+          <div class="mt-12 bg-light-1 rounded-xl p-6 shadow-sm">
+            <h3 class="text-lg font-semibold text-dark-2 mb-6">社区活跃度趋势</h3>
+            <div class="h-64">
+              <canvas id="activity-chart"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 服务器列表 -->
+      <section id="servers" class="py-16 bg-light-1">
+        <div class="container mx-auto px-4">
+          <div class="text-center mb-12">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">推荐服务器</h2>
+            <p class="text-dark-2 max-w-2xl mx-auto">精选优质Minecraft服务器，总有一款适合你</p>
+          </div>
+
+          <!-- 筛选工具栏 -->
+          <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+            <div class="flex flex-wrap gap-2">
+              <button class="px-4 py-2 bg-primary text-white rounded-lg text-sm">全部服务器</button>
+              <button
+                class="px-4 py-2 bg-white text-dark-2 hover:bg-light-2 rounded-lg text-sm transition-colors"
+              >
+                生存
+              </button>
+              <button
+                class="px-4 py-2 bg-white text-dark-2 hover:bg-light-2 rounded-lg text-sm transition-colors"
+              >
+                创造
+              </button>
+              <button
+                class="px-4 py-2 bg-white text-dark-2 hover:bg-light-2 rounded-lg text-sm transition-colors"
+              >
+                RPG
+              </button>
+              <button
+                class="px-4 py-2 bg-white text-dark-2 hover:bg-light-2 rounded-lg text-sm transition-colors"
+              >
+                迷你游戏
+              </button>
+            </div>
+
+            <div class="relative w-full sm:w-auto">
+              <input
+                type="text"
+                placeholder="搜索服务器..."
+                class="pl-10 pr-4 py-2 rounded-lg border border-light-2 focus:outline-none focus:ring-2 focus:ring-primary/50 w-full sm:w-64"
+              />
+              <i
+                class="fa fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-2"
+              ></i>
+            </div>
+          </div>
+
+          <!-- 服务器卡片网格 -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- 服务器卡片1 -->
+            <div
+              class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div class="p-5">
+                <div class="flex items-start gap-4">
+                  <img
+                    src="https://picsum.photos/id/237/80/80"
+                    alt="恒星主城服务器图标"
+                    class="w-16 h-16 rounded-lg object-cover border border-light-2"
+                  />
+                  <div class="flex-1">
+                    <h3 class="font-bold text-lg mb-1">恒星主城</h3>
+                    <p class="text-dark-2 text-sm mb-2 flex items-center">
+                      <i class="fa fa-map-marker mr-1"></i> mc.starmc.com
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success"
+                      >
+                        <i class="fa fa-check-circle mr-1"></i>在线
+                      </span>
+                      <span class="text-sm text-dark-2">128/200 玩家</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-light-2">
+                  <div class="flex justify-between text-sm mb-3">
+                    <span class="text-dark-2">版本: <span class="text-dark">1.20.1</span></span>
+                    <span class="text-dark-2">类型: <span class="text-dark">生存/创造</span></span>
+                  </div>
+                  <p class="text-dark-2 text-sm line-clamp-2">
+                    官方主城服务器，包含生存、创造和小游戏模式，适合各类玩家体验。
+                  </p>
+                  <button
+                    class="mt-4 w-full py-2 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg transition-colors text-sm font-medium"
+                  >
+                    查看详情
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 服务器卡片2 -->
+            <div
+              class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div class="p-5">
+                <div class="flex items-start gap-4">
+                  <img
+                    src="https://picsum.photos/id/239/80/80"
+                    alt="幻想RPG服务器图标"
+                    class="w-16 h-16 rounded-lg object-cover border border-light-2"
+                  />
+                  <div class="flex-1">
+                    <h3 class="font-bold text-lg mb-1">幻想RPG</h3>
+                    <p class="text-dark-2 text-sm mb-2 flex items-center">
+                      <i class="fa fa-map-marker mr-1"></i> rpg.fantasy-mc.com
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success"
+                      >
+                        <i class="fa fa-check-circle mr-1"></i>在线
+                      </span>
+                      <span class="text-sm text-dark-2">87/150 玩家</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-light-2">
+                  <div class="flex justify-between text-sm mb-3">
+                    <span class="text-dark-2">版本: <span class="text-dark">1.19.2</span></span>
+                    <span class="text-dark-2">类型: <span class="text-dark">RPG/冒险</span></span>
+                  </div>
+                  <p class="text-dark-2 text-sm line-clamp-2">
+                    大型角色扮演服务器，丰富的剧情任务和职业系统，沉浸式游戏体验。
+                  </p>
+                  <button
+                    class="mt-4 w-full py-2 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg transition-colors text-sm font-medium"
+                  >
+                    查看详情
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 服务器卡片3 -->
+            <div
+              class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div class="p-5">
+                <div class="flex items-start gap-4">
+                  <img
+                    src="https://picsum.photos/id/240/80/80"
+                    alt="像素创造服务器图标"
+                    class="w-16 h-16 rounded-lg object-cover border border-light-2"
+                  />
+                  <div class="flex-1">
+                    <h3 class="font-bold text-lg mb-1">像素创造</h3>
+                    <p class="text-dark-2 text-sm mb-2 flex items-center">
+                      <i class="fa fa-map-marker mr-1"></i> build.pixelmc.net
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success"
+                      >
+                        <i class="fa fa-check-circle mr-1"></i>在线
+                      </span>
+                      <span class="text-sm text-dark-2">45/100 玩家</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-light-2">
+                  <div class="flex justify-between text-sm mb-3">
+                    <span class="text-dark-2">版本: <span class="text-dark">1.20.1</span></span>
+                    <span class="text-dark-2">类型: <span class="text-dark">创造/建筑</span></span>
+                  </div>
+                  <p class="text-dark-2 text-sm line-clamp-2">
+                    专注于建筑创造的服务器，拥有多种建筑工具和材质包，展示你的创意。
+                  </p>
+                  <button
+                    class="mt-4 w-full py-2 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg transition-colors text-sm font-medium"
+                  >
+                    查看详情
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 服务器卡片4 -->
+            <div
+              class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div class="p-5">
+                <div class="flex items-start gap-4">
+                  <img
+                    src="https://picsum.photos/id/241/80/80"
+                    alt="迷你乐园服务器图标"
+                    class="w-16 h-16 rounded-lg object-cover border border-light-2"
+                  />
+                  <div class="flex-1">
+                    <h3 class="font-bold text-lg mb-1">迷你乐园</h3>
+                    <p class="text-dark-2 text-sm mb-2 flex items-center">
+                      <i class="fa fa-map-marker mr-1"></i> mini.mineland.com
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success"
+                      >
+                        <i class="fa fa-check-circle mr-1"></i>在线
+                      </span>
+                      <span class="text-sm text-dark-2">203/300 玩家</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-light-2">
+                  <div class="flex justify-between text-sm mb-3">
+                    <span class="text-dark-2">版本: <span class="text-dark">1.18.2</span></span>
+                    <span class="text-dark-2">类型: <span class="text-dark">迷你游戏</span></span>
+                  </div>
+                  <p class="text-dark-2 text-sm line-clamp-2">
+                    包含多种迷你游戏的服务器，饥饿游戏、起床战争、空岛战争等应有尽有。
+                  </p>
+                  <button
+                    class="mt-4 w-full py-2 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg transition-colors text-sm font-medium"
+                  >
+                    查看详情
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 服务器卡片5 -->
+            <div
+              class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div class="p-5">
+                <div class="flex items-start gap-4">
+                  <img
+                    src="https://picsum.photos/id/242/80/80"
+                    alt="科技复兴服务器图标"
+                    class="w-16 h-16 rounded-lg object-cover border border-light-2"
+                  />
+                  <div class="flex-1">
+                    <h3 class="font-bold text-lg mb-1">科技复兴</h3>
+                    <p class="text-dark-2 text-sm mb-2 flex items-center">
+                      <i class="fa fa-map-marker mr-1"></i> tech.advancedmc.org
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success"
+                      >
+                        <i class="fa fa-check-circle mr-1"></i>在线
+                      </span>
+                      <span class="text-sm text-dark-2">67/120 玩家</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-light-2">
+                  <div class="flex justify-between text-sm mb-3">
+                    <span class="text-dark-2">版本: <span class="text-dark">1.19.2</span></span>
+                    <span class="text-dark-2">类型: <span class="text-dark">科技/生存</span></span>
+                  </div>
+                  <p class="text-dark-2 text-sm line-clamp-2">
+                    包含多种科技模组的生存服务器，工业、热力膨胀、 mekanism等经典模组。
+                  </p>
+                  <button
+                    class="mt-4 w-full py-2 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg transition-colors text-sm font-medium"
+                  >
+                    查看详情
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 服务器卡片6 -->
+            <div
+              class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div class="p-5">
+                <div class="flex items-start gap-4">
+                  <img
+                    src="https://picsum.photos/id/243/80/80"
+                    alt="魔法世界服务器图标"
+                    class="w-16 h-16 rounded-lg object-cover border border-light-2"
+                  />
+                  <div class="flex-1">
+                    <h3 class="font-bold text-lg mb-1">魔法世界</h3>
+                    <p class="text-dark-2 text-sm mb-2 flex items-center">
+                      <i class="fa fa-map-marker mr-1"></i> magic.wizardmc.net
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-danger/10 text-danger"
+                      >
+                        <i class="fa fa-times-circle mr-1"></i>离线
+                      </span>
+                      <span class="text-sm text-dark-2">0/100 玩家</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-light-2">
+                  <div class="flex justify-between text-sm mb-3">
+                    <span class="text-dark-2">版本: <span class="text-dark">1.18.2</span></span>
+                    <span class="text-dark-2">类型: <span class="text-dark">魔法/冒险</span></span>
+                  </div>
+                  <p class="text-dark-2 text-sm line-clamp-2">
+                    以魔法为主题的模组服务器，包含神秘时代、奥术工艺等多种魔法模组。
+                  </p>
+                  <button
+                    class="mt-4 w-full py-2 border border-light-2 text-dark-2 rounded-lg text-sm font-medium cursor-not-allowed"
+                  >
+                    服务器离线
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 服务器卡片7 -->
+            <div
+              class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div class="p-5">
+                <div class="flex items-start gap-4">
+                  <img
+                    src="https://picsum.photos/id/244/80/80"
+                    alt="战争前线服务器图标"
+                    class="w-16 h-16 rounded-lg object-cover border border-light-2"
+                  />
+                  <div class="flex-1">
+                    <h3 class="font-bold text-lg mb-1">战争前线</h3>
+                    <p class="text-dark-2 text-sm mb-2 flex items-center">
+                      <i class="fa fa-map-marker mr-1"></i> war.battlemc.com
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success"
+                      >
+                        <i class="fa fa-check-circle mr-1"></i>在线
+                      </span>
+                      <span class="text-sm text-dark-2">93/150 玩家</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-light-2">
+                  <div class="flex justify-between text-sm mb-3">
+                    <span class="text-dark-2">版本: <span class="text-dark">1.19.4</span></span>
+                    <span class="text-dark-2">类型: <span class="text-dark">PVP/战争</span></span>
+                  </div>
+                  <p class="text-dark-2 text-sm line-clamp-2">
+                    专注于PVP的服务器，包含团队战、资源争夺和领地战争等多种玩法。
+                  </p>
+                  <button
+                    class="mt-4 w-full py-2 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg transition-colors text-sm font-medium"
+                  >
+                    查看详情
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 服务器卡片8 -->
+            <div
+              class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div class="p-5">
+                <div class="flex items-start gap-4">
+                  <img
+                    src="https://picsum.photos/id/248/80/80"
+                    alt="农场物语服务器图标"
+                    class="w-16 h-16 rounded-lg object-cover border border-light-2"
+                  />
+                  <div class="flex-1">
+                    <h3 class="font-bold text-lg mb-1">农场物语</h3>
+                    <p class="text-dark-2 text-sm mb-2 flex items-center">
+                      <i class="fa fa-map-marker mr-1"></i> farm.harvestmc.org
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success"
+                      >
+                        <i class="fa fa-check-circle mr-1"></i>在线
+                      </span>
+                      <span class="text-sm text-dark-2">32/80 玩家</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-light-2">
+                  <div class="flex justify-between text-sm mb-3">
+                    <span class="text-dark-2">版本: <span class="text-dark">1.20.1</span></span>
+                    <span class="text-dark-2">类型: <span class="text-dark">农业/生存</span></span>
+                  </div>
+                  <p class="text-dark-2 text-sm line-clamp-2">
+                    以农业和生活为主题的服务器，包含多种作物、动物和烹饪系统。
+                  </p>
+                  <button
+                    class="mt-4 w-full py-2 border border-primary text-primary hover:bg-primary hover:text-white rounded-lg transition-colors text-sm font-medium"
+                  >
+                    查看详情
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 加载更多按钮 -->
+          <div class="mt-10 text-center">
+            <button
+              class="px-8 py-3 bg-white border border-light-2 hover:bg-light-1 text-dark font-medium rounded-lg transition-colors"
+            >
+              <i class="fa fa-refresh mr-2"></i>加载更多服务器
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 服务器入驻申请 -->
+      <section id="apply" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+          <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+              <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">
+                服务器入驻申请
+              </h2>
+              <p class="text-dark-2 max-w-2xl mx-auto">
+                将您的Minecraft服务器加入恒星MC社区，让更多玩家发现并加入您的服务器
+              </p>
+            </div>
+
+            <div class="bg-light-1 rounded-2xl p-6 md:p-8 shadow-sm">
+              <form id="server-application" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label for="server-name" class="block text-sm font-medium text-dark-2 mb-1"
+                      >服务器名称 <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="server-name"
+                      name="server-name"
+                      required
+                      class="w-full px-4 py-2 rounded-lg border border-light-2 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="server-address" class="block text-sm font-medium text-dark-2 mb-1"
+                      >服务器地址 <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="server-address"
+                      name="server-address"
+                      placeholder="例如: mc.example.com 或 IP:端口"
+                      required
+                      class="w-full px-4 py-2 rounded-lg border border-light-2 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label for="server-version" class="block text-sm font-medium text-dark-2 mb-1"
+                      >游戏版本 <span class="text-danger">*</span></label
+                    >
+                    <select
+                      id="server-version"
+                      name="server-version"
+                      required
+                      class="w-full px-4 py-2 rounded-lg border border-light-2 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    >
+                      <option value="">请选择版本</option>
+                      <option value="1.20.1">1.20.1</option>
+                      <option value="1.19.4">1.19.4</option>
+                      <option value="1.18.2">1.18.2</option>
+                      <option value="1.17.1">1.17.1</option>
+                      <option value="1.16.5">1.16.5</option>
+                      <option value="其他">其他</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for="server-type" class="block text-sm font-medium text-dark-2 mb-1"
+                      >服务器类型 <span class="text-danger">*</span></label
+                    >
+                    <select
+                      id="server-type"
+                      name="server-type"
+                      required
+                      class="w-full px-4 py-2 rounded-lg border border-light-2 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    >
+                      <option value="">请选择类型</option>
+                      <option value="生存">生存</option>
+                      <option value="创造">创造</option>
+                      <option value="RPG">RPG</option>
+                      <option value="迷你游戏">迷你游戏</option>
+                      <option value="科技模组">科技模组</option>
+                      <option value="魔法模组">魔法模组</option>
+                      <option value="PVP">PVP</option>
+                      <option value="其他">其他</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="server-icon" class="block text-sm font-medium text-dark-2 mb-1"
+                    >服务器图标 (图片URL)</label
+                  >
+                  <input
+                    type="url"
+                    id="server-icon"
+                    name="server-icon"
+                    placeholder="https://example.com/icon.png"
+                    class="w-full px-4 py-2 rounded-lg border border-light-2 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  />
+                  <p class="text-xs text-dark-2/70 mt-1">建议尺寸: 64x64px 或 128x128px</p>
+                </div>
+
+                <div>
+                  <label for="server-description" class="block text-sm font-medium text-dark-2 mb-1"
+                    >服务器简介 <span class="text-danger">*</span></label
+                  >
+                  <textarea
+                    id="server-description"
+                    name="server-description"
+                    rows="4"
+                    required
+                    placeholder="请简要描述您的服务器特点、玩法、规则等..."
+                    class="w-full px-4 py-2 rounded-lg border border-light-2 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  ></textarea>
+                  <p class="text-xs text-dark-2/70 mt-1">请控制在300字以内，突出服务器特色</p>
+                </div>
+
+                <div>
+                  <label for="contact-info" class="block text-sm font-medium text-dark-2 mb-1"
+                    >联系方式 <span class="text-danger">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="contact-info"
+                    name="contact-info"
+                    placeholder="QQ号、微信号或邮箱"
+                    required
+                    class="w-full px-4 py-2 rounded-lg border border-light-2 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  />
+                  <p class="text-xs text-dark-2/70 mt-1">用于审核沟通和后续联系</p>
+                </div>
+
+                <div class="pt-2">
+                  <button
+                    type="submit"
+                    class="w-full md:w-auto px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg transition-colors shadow-sm"
+                  >
+                    <i class="fa fa-paper-plane mr-2"></i>提交入驻申请
+                  </button>
+                  <p class="text-xs text-dark-2/70 mt-3">
+                    提交后，我们将在24小时内进行审核，结果将通过您提供的联系方式告知
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 联系我们 -->
+      <section id="contact" class="py-16 bg-primary/5">
+        <div class="container mx-auto px-4">
+          <div class="text-center mb-12">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">加入我们</h2>
+            <p class="text-dark-2 max-w-2xl mx-auto">
+              加入恒星MC社区交流群，结识更多我的世界玩家，获取最新社区动态
+            </p>
+          </div>
+
+          <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+              class="bg-white rounded-2xl p-6 shadow-sm flex flex-col items-center justify-center text-center"
+            >
+              <div
+                class="w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center mb-6"
+              >
+                <i class="fa fa-qq text-5xl text-primary"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">QQ交流群</h3>
+              <p class="text-dark-2 mb-6">加入我们的QQ群，与其他玩家交流互动</p>
+              <div class="bg-light-1 p-4 rounded-lg mb-4">
+                <p class="font-mono text-lg">123456789</p>
+              </div>
+              <p class="text-sm text-dark-2">或扫描右侧二维码加入</p>
+            </div>
+
+            <div
+              class="bg-white rounded-2xl p-6 shadow-sm flex flex-col items-center justify-center text-center"
+            >
+              <div
+                class="w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center mb-6"
+              >
+                <i class="fa fa-weixin text-5xl text-success"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">微信公众号</h3>
+              <p class="text-dark-2 mb-6">关注公众号，获取最新社区资讯</p>
+              <div
+                class="bg-light-1 p-4 rounded-lg mb-4 w-48 h-48 flex items-center justify-center"
+              >
+                <p class="text-sm text-dark-2">微信公众号二维码</p>
+              </div>
+              <p class="text-sm text-dark-2">扫码关注获取更多内容</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          <div>
+            <div class="flex items-center space-x-2 mb-6">
+              <img
+                src="https://picsum.photos/40/40"
+                alt="恒星MC社区Logo"
+                class="w-10 h-10 rounded-lg"
+              />
+              <h2 class="text-xl font-bold">恒星MC社区</h2>
+            </div>
+            <p class="text-white/70 mb-6">汇聚优质Minecraft服务器，打造友好的我的世界玩家社区</p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <i class="fa fa-github"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <i class="fa fa-bilibili"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
+              >
+                <i class="fa fa-youtube-play"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-6">快速链接</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="#servers" class="text-white/70 hover:text-white transition-colors"
+                  >服务器列表</a
+                >
+              </li>
+              <li>
+                <a href="#stats" class="text-white/70 hover:text-white transition-colors"
+                  >社区统计</a
+                >
+              </li>
+              <li>
+                <a href="#apply" class="text-white/70 hover:text-white transition-colors"
+                  >服务器入驻</a
+                >
+              </li>
+              <li>
+                <a href="#contact" class="text-white/70 hover:text-white transition-colors"
+                  >联系我们</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-6">资源导航</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-white/70 hover:text-white transition-colors">游戏下载</a>
+              </li>
+              <li>
+                <a href="#" class="text-white/70 hover:text-white transition-colors">材质包</a>
+              </li>
+              <li>
+                <a href="#" class="text-white/70 hover:text-white transition-colors">模组推荐</a>
+              </li>
+              <li>
+                <a href="#" class="text-white/70 hover:text-white transition-colors">插件资源</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-semibold mb-6">法律信息</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-white/70 hover:text-white transition-colors">服务条款</a>
+              </li>
+              <li>
+                <a href="#" class="text-white/70 hover:text-white transition-colors">隐私政策</a>
+              </li>
+              <li>
+                <a href="#" class="text-white/70 hover:text-white transition-colors">版权声明</a>
+              </li>
+              <li>
+                <a href="#" class="text-white/70 hover:text-white transition-colors">投诉建议</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-white/10 pt-8 text-center text-white/50 text-sm">
+          <p>© 2023 恒星MC社区 版权所有 | Minecraft 是 Mojang Studios 的注册商标</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 回到顶部按钮 -->
+    <button
+      id="back-to-top"
+      class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-primary text-white shadow-lg flex items-center justify-center opacity-0 invisible transition-all z-50"
+    >
+      <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+      // 导航栏滚动效果
+      const navbar = document.getElementById('navbar')
+      const backToTop = document.getElementById('back-to-top')
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+          navbar.classList.add('bg-dark/95', 'shadow-md')
+          navbar.classList.remove('bg-glass')
+
+          backToTop.classList.remove('opacity-0', 'invisible')
+          backToTop.classList.add('opacity-100', 'visible')
+        } else {
+          navbar.classList.remove('bg-dark/95', 'shadow-md')
+          navbar.classList.add('bg-glass')
+
+          backToTop.classList.add('opacity-0', 'invisible')
+          backToTop.classList.remove('opacity-100', 'visible')
+        }
+      })
+
+      // 移动端菜单
+      const menuToggle = document.getElementById('menu-toggle')
+      const mobileMenu = document.getElementById('mobile-menu')
+
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden')
+        const icon = menuToggle.querySelector('i')
+        if (mobileMenu.classList.contains('hidden')) {
+          icon.classList.remove('fa-times')
+          icon.classList.add('fa-bars')
+        } else {
+          icon.classList.remove('fa-bars')
+          icon.classList.add('fa-times')
+        }
+      })
+
+      // 平滑滚动
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault()
+
+          // 关闭移动端菜单
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden')
+            const icon = menuToggle.querySelector('i')
+            icon.classList.remove('fa-times')
+            icon.classList.add('fa-bars')
+          }
+
+          const targetId = this.getAttribute('href')
+          if (targetId === '#') return
+
+          const targetElement = document.querySelector(targetId)
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth',
+            })
+          }
+        })
+      })
+
+      // 回到顶部
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
+      })
+
+      // 轮播图
+      const carouselItems = document.querySelectorAll('.carousel-item')
+      const carouselDots = document.querySelectorAll('.carousel-dot')
+      let currentSlide = 0
+
+      function showSlide(index) {
+        // 隐藏所有轮播项
+        carouselItems.forEach((item) => {
+          item.classList.add('opacity-0')
+          item.classList.remove('opacity-100')
+        })
+
+        // 重置所有指示点
+        carouselDots.forEach((dot) => {
+          dot.classList.add('opacity-50')
+          dot.classList.remove('opacity-100')
+        })
+
+        // 显示当前轮播项和激活指示点
+        carouselItems[index].classList.remove('opacity-0')
+        carouselItems[index].classList.add('opacity-100')
+        carouselDots[index].classList.remove('opacity-50')
+        carouselDots[index].classList.add('opacity-100')
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % carouselItems.length
+        showSlide(currentSlide)
+      }
+
+      // 设置轮播自动播放
+      let slideInterval = setInterval(nextSlide, 5000)
+
+      // 点击指示点切换轮播
+      carouselDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          clearInterval(slideInterval)
+          currentSlide = index
+          showSlide(currentSlide)
+          slideInterval = setInterval(nextSlide, 5000)
+        })
+      })
+
+      // 活跃度图表
+      const ctx = document.getElementById('activity-chart').getContext('2d')
+      const activityChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+          datasets: [
+            {
+              label: '在线玩家数',
+              data: [850, 920, 780, 1050, 1100, 1500, 1350],
+              borderColor: '#165DFF',
+              backgroundColor: 'rgba(22, 93, 255, 0.1)',
+              tension: 0.4,
+              fill: true,
+            },
+            {
+              label: '活跃服务器数',
+              data: [15, 16, 14, 18, 17, 20, 19],
+              borderColor: '#FF7D00',
+              backgroundColor: 'rgba(255, 125, 0, 0.1)',
+              tension: 0.4,
+              fill: true,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      })
+
+      // 服务器入驻表单提交
+      const serverForm = document.getElementById('server-application')
+
+      serverForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+
+        // 获取表单数据
+        const formData = new FormData(serverForm)
+        const formValues = Object.fromEntries(formData.entries())
+
+        // 生成GitHub Issue内容
+        let issueBody = `**服务器名称**: ${formValues['server-name']}\n`
+        issueBody += `**服务器地址**: ${formValues['server-address']}\n`
+        issueBody += `**版本**: ${formValues['server-version']}\n`
+        issueBody += `**类型**: ${formValues['server-type']}\n`
+
+        if (formValues['server-icon']) {
+          issueBody += `**服务器图标**: ${formValues['server-icon']}\n`
+        }
+
+        issueBody += `**服务器简介**: ${formValues['server-description']}\n`
+        issueBody += `**联系方式**: ${formValues['contact-info']}\n`
+
+        // 构建GitHub Issue URL
+        const githubRepo = 'your-org/mc-community' // 替换为实际仓库
+        const issueTitle = `[入驻] ${formValues['server-name']}`
+        const issueUrl = `https://github.com/${githubRepo}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}&labels=server-submission`
+
+        // 打开GitHub Issue页面
+        window.open(issueUrl, '_blank')
+      })
+
+      // 数字动画效果
+      function animateValue(id, start, end, duration) {
+        const obj = document.getElementById(id)
+        if (!obj) return
+
+        let startTimestamp = null
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1)
+
+          // 处理千位分隔符
+          const value = Math.floor(progress * (end - start) + start)
+          obj.innerText = value.toLocaleString()
+
+          if (progress < 1) {
+            window.requestAnimationFrame(step)
+          }
+        }
+        window.requestAnimationFrame(step)
+      }
+
+      // 监听元素是否进入视口
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (entry.target.id === 'total-servers') {
+                animateValue('total-servers', 0, 24, 2000)
+              } else if (entry.target.id === 'online-servers') {
+                animateValue('online-servers', 0, 18, 2000)
+              } else if (entry.target.id === 'total-players') {
+                animateValue('total-players', 0, 1254, 2000)
+              }
+              observer.unobserve(entry.target)
+            }
+          })
+        },
+        { threshold: 0.5 },
+      )
+
+      // 观察统计数字元素
+      document.querySelectorAll('#total-servers, #online-servers, #total-players').forEach((el) => {
+        observer.observe(el)
+      })
+    </script>
+  </body>
+</html>

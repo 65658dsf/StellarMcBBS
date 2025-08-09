@@ -9,5 +9,16 @@
     "motd": "欢迎来到龙之冒险:新征程v2.3！",
     "favicon": "",
     "max": 100
+  },
+  {
+    "name": "花枫服务器",
+    "ip": "play.flmp.uk",
+    "port": 25565,
+    "description": "服务器简介: 可以自由切换游戏模式的建筑向服务器\n官网：https://mc.flmp.uk\n论坛：https://bbs.dfggmc.top/t/flmp-server\nQQ审核群：615044085",
+    "type": "创造",
+    "version": "1.21.7",
+    "motd": "花枫服务器",
+    "favicon": "",
+    "max": 100
   }
 ]

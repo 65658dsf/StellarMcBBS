@@ -200,14 +200,14 @@ const getServerIcon = (server: Server) => {
     return server.icon
   }
   // 默认图标
-  return './favicon.ico'
+  return '/favicon.ico'
 }
 
 const handleImageError = (event: Event) => {
   // 图片加载失败时，回退到默认图标
   const imgElement = event.target as HTMLImageElement
   if (imgElement) {
-    imgElement.src = './favicon.ico'
+    imgElement.src = '/favicon.ico'
   }
 }
 

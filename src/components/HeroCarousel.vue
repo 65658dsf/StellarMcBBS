@@ -1,82 +1,47 @@
 <template>
   <section class="relative h-screen overflow-hidden">
     <div id="carousel" class="h-full">
-      <!-- 轮播项1 -->
+      <!-- 轮播项 -->
       <div
+        v-for="(slide, index) in slides"
+        :key="index"
         :class="[
           'carousel-item absolute inset-0 transition-opacity duration-1000',
-          currentSlide === 0 ? 'opacity-100' : 'opacity-0',
+          currentSlide === index ? 'opacity-100' : 'opacity-0',
         ]"
       >
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 z-10"></div>
-        <img
-          src="https://picsum.photos/id/137/1920/1080"
-          alt="我的世界服务器风景"
-          class="w-full h-full object-cover"
-        />
+        <img :src="slide.image" :alt="slide.alt" class="w-full h-full object-cover" />
         <div class="absolute inset-0 z-20 flex items-center justify-center text-center px-4">
-          <div class="max-w-3xl transform transition-transform duration-1000">
+          <div
+            :class="[
+              'max-w-3xl',
+              index === 0 ? 'transform transition-transform duration-1000' : '',
+            ]"
+          >
             <h1 class="text-[clamp(2rem,5vw,4rem)] font-bold text-white mb-6 text-shadow-lg">
-              恒星MC社区
+              {{ slide.title }}
             </h1>
             <p
               class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-8 text-shadow max-w-2xl mx-auto"
             >
-              汇聚优质Minecraft服务器，打造友好的我的世界玩家社区
+              {{ slide.description }}
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
               <a
-                href="#contact"
-                class="px-8 py-3 bg-accent hover:bg-accent/90 text-white font-medium rounded-lg transition-all transform hover:scale-105 shadow-lg"
+                :href="slide.primaryButton.href"
+                :class="[
+                  'px-8 py-3 font-medium rounded-lg transition-all transform hover:scale-105 shadow-lg',
+                  slide.primaryButton.class,
+                ]"
               >
-                <i class="fa fa-comments-o mr-2"></i>加入交流群
+                <i :class="slide.primaryButton.icon"></i>{{ slide.primaryButton.text }}
               </a>
               <a
-                href="#apply"
+                :href="slide.secondaryButton.href"
                 class="px-8 py-3 bg-transparent hover:bg-white/10 text-white font-medium rounded-lg border border-white transition-all transform hover:scale-105"
               >
-                <i class="fa fa-server mr-2"></i>服务器入驻
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 轮播项2 -->
-      <div
-        :class="[
-          'carousel-item absolute inset-0 transition-opacity duration-1000',
-          currentSlide === 1 ? 'opacity-100' : 'opacity-0',
-        ]"
-      >
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 z-10"></div>
-        <img
-          src="https://picsum.photos/id/169/1920/1080"
-          alt="我的世界游戏截图"
-          class="w-full h-full object-cover"
-        />
-        <div class="absolute inset-0 z-20 flex items-center justify-center text-center px-4">
-          <div class="max-w-3xl">
-            <h1 class="text-[clamp(2rem,5vw,4rem)] font-bold text-white mb-6 text-shadow-lg">
-              发现精彩服务器
-            </h1>
-            <p
-              class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-8 text-shadow max-w-2xl mx-auto"
-            >
-              从生存到创造，从迷你游戏到大型RPG，找到适合你的服务器
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-              <a
-                href="#servers"
-                class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg transition-all transform hover:scale-105 shadow-lg"
-              >
-                <i class="fa fa-search mr-2"></i>浏览服务器
-              </a>
-              <a
-                href="#stats"
-                class="px-8 py-3 bg-transparent hover:bg-white/10 text-white font-medium rounded-lg border border-white transition-all transform hover:scale-105"
-              >
-                <i class="fa fa-bar-chart-o mr-2"></i>查看社区数据
+                <i :class="slide.secondaryButton.icon"></i>{{ slide.secondaryButton.text }}
               </a>
             </div>
           </div>
@@ -112,7 +77,59 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const currentSlide = ref(0)
-const slides = [0, 1]
+const slides = [
+  {
+    image: '/src/assets/bg1.jpg',
+    alt: '我的世界服务器风景',
+    title: '恒星MC社区',
+    description: '汇聚优质Minecraft服务器，打造友好的我的世界玩家社区',
+    primaryButton: {
+      href: '#contact',
+      class: 'bg-accent hover:bg-accent/90 text-white',
+      icon: 'fa fa-comments-o mr-2',
+      text: '加入交流群',
+    },
+    secondaryButton: {
+      href: '#apply',
+      icon: 'fa fa-server mr-2',
+      text: '服务器入驻',
+    },
+  },
+  {
+    image: '/src/assets/bg2.jpg',
+    alt: '我的世界游戏截图',
+    title: '发现精彩服务器',
+    description: '从生存到创造，从迷你游戏到大型RPG，找到适合你的服务器',
+    primaryButton: {
+      href: '#servers',
+      class: 'bg-primary hover:bg-primary/90 text-white',
+      icon: 'fa fa-search mr-2',
+      text: '浏览服务器',
+    },
+    secondaryButton: {
+      href: '#stats',
+      icon: 'fa fa-bar-chart-o mr-2',
+      text: '查看社区数据',
+    },
+  },
+  {
+    image: '/src/assets/bg3.png',
+    alt: '我的世界建筑展示',
+    title: '探索无限可能',
+    description: '在恒星MC社区，每个玩家都能创造属于自己的精彩世界',
+    primaryButton: {
+      href: '#servers',
+      class: 'bg-success hover:bg-success/90 text-white',
+      icon: 'fa fa-rocket mr-2',
+      text: '立即探索',
+    },
+    secondaryButton: {
+      href: '#about',
+      icon: 'fa fa-info-circle mr-2',
+      text: '了解更多',
+    },
+  },
+]
 
 const goToSlide = (index: number) => {
   currentSlide.value = index

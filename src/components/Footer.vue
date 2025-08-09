@@ -10,22 +10,34 @@
           <p class="text-white/70 mb-6">汇聚优质Minecraft服务器，打造友好的我的世界玩家社区</p>
           <div class="flex space-x-4">
             <a
-              href="#"
+              href="https://github.com/65658dsf/StellarMcBBS/"
               class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
             >
               <i class="fa fa-github"></i>
             </a>
             <a
-              href="#"
+              href="https://space.bilibili.com/500351788"
               class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
             >
-              <i class="fa fa-bilibili"></i>
+              <img src="@/assets/bilibili.svg" alt="哔哩哔哩" class="w-6 h-6" />
             </a>
             <a
-              href="#"
+              href="https://qm.qq.com/q/o5vx2WPe24"
+              target="_blank"
               class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
             >
-              <i class="fa fa-youtube-play"></i>
+              <img src="@/assets/QQ.svg" alt="QQ" class="w-6 h-6" />
+            </a>
+          </div>
+          <!-- 备案信息 -->
+          <div class="flex items-center space-x-2">
+            <a
+              href="https://beian.miit.gov.cn/"
+              target="_blank"
+              class="flex items-center space-x-2"
+            >
+              <img src="@/assets/ba.png" alt="备案" class="w-6 h-6" />
+              <p class="text-white/70">皖ICP备2024033748号-6</p>
             </a>
           </div>
         </div>
@@ -55,19 +67,15 @@
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold mb-6">资源导航</h3>
+          <h3 class="text-lg font-semibold mb-6">友情链接</h3>
           <ul class="space-y-3">
             <li>
-              <a href="#" class="text-white/70 hover:text-white transition-colors">游戏下载</a>
-            </li>
-            <li>
-              <a href="#" class="text-white/70 hover:text-white transition-colors">材质包</a>
-            </li>
-            <li>
-              <a href="#" class="text-white/70 hover:text-white transition-colors">模组推荐</a>
-            </li>
-            <li>
-              <a href="#" class="text-white/70 hover:text-white transition-colors">插件资源</a>
+              <a
+                href="https://www.stellarfrp.top"
+                target="_blank"
+                class="text-white/70 hover:text-white transition-colors"
+                >恒星映射</a
+              >
             </li>
           </ul>
         </div>
@@ -92,7 +100,7 @@
       </div>
 
       <div class="border-t border-white/10 pt-8 text-center text-white/50 text-sm">
-        <p>© 2023 恒星MC社区 版权所有 | Minecraft 是 Mojang Studios 的注册商标</p>
+        <p>© 2025 恒星MC社区 版权所有 | Minecraft 是 Mojang Studios 的注册商标</p>
       </div>
     </div>
   </footer>

@@ -223,7 +223,7 @@ const submitApplication = () => {
       description: '',
       contact: '',
     }
-  } catch (error) {
+  } catch {
     submitStatus.value = {
       type: 'error',
       message: '创建申请链接失败，请手动前往GitHub提交。',

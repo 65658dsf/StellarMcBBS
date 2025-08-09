@@ -200,14 +200,14 @@ const getServerIcon = (server: Server) => {
     return server.icon
   }
   // 默认图标
-  return '/src/assets/favicon.ico'
+  return './favicon.ico'
 }
 
 const handleImageError = (event: Event) => {
   // 图片加载失败时，回退到默认图标
   const imgElement = event.target as HTMLImageElement
   if (imgElement) {
-    imgElement.src = '/src/assets/favicon.ico'
+    imgElement.src = './favicon.ico'
   }
 }
 
@@ -230,10 +230,16 @@ const loadServers = async () => {
       version: server.version,
       type: server.type,
       description: server.description || server.motd || '',
-      category: server.type === '生存' ? 'survival' : 
-                server.type === '创造' ? 'creative' : 
-                server.type === 'RPG' ? 'rpg' : 
-                server.type === '迷你游戏' ? 'minigames' : 'survival',
+      category:
+        server.type === '生存'
+          ? 'survival'
+          : server.type === '创造'
+            ? 'creative'
+            : server.type === 'RPG'
+              ? 'rpg'
+              : server.type === '迷你游戏'
+                ? 'minigames'
+                : 'survival',
       ping: 0,
       city: null,
       mod: server.type,

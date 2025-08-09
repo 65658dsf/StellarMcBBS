@@ -4,7 +4,7 @@
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
         <div>
           <div class="flex items-center space-x-2 mb-6">
-            <img src="@/assets/favicon.ico" alt="恒星MC社区Logo" class="w-10 h-10 rounded-lg" />
+            <img src="/favicon.ico" alt="恒星MC社区Logo" class="w-10 h-10 rounded-lg" />
             <h2 class="text-xl font-bold">恒星MC社区</h2>
           </div>
           <p class="text-white/70 mb-6">汇聚优质Minecraft服务器，打造友好的我的世界玩家社区</p>
@@ -19,14 +19,14 @@
               href="https://space.bilibili.com/500351788"
               class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
             >
-              <img src="@/assets/bilibili.svg" alt="哔哩哔哩" class="w-6 h-6" />
+              <img src="/bilibili.svg" alt="哔哩哔哩" class="w-6 h-6" />
             </a>
             <a
               href="https://qm.qq.com/q/o5vx2WPe24"
               target="_blank"
               class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors"
             >
-              <img src="@/assets/QQ.svg" alt="QQ" class="w-6 h-6" />
+              <img src="/QQ.svg" alt="QQ" class="w-6 h-6" />
             </a>
           </div>
           <!-- 备案信息 -->
@@ -36,7 +36,7 @@
               target="_blank"
               class="flex items-center space-x-2"
             >
-              <img src="@/assets/ba.png" alt="备案" class="w-6 h-6" />
+              <img src="/ba.png" alt="备案" class="w-6 h-6" />
               <p class="text-white/70">皖ICP备2024033748号-6</p>
             </a>
           </div>

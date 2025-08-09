@@ -79,7 +79,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const currentSlide = ref(0)
 const slides = [
   {
-    image: '/src/assets/bg1.jpg',
+    image: '/bg1.jpg',
     alt: '我的世界服务器风景',
     title: '恒星MC社区',
     description: '汇聚优质Minecraft服务器，打造友好的我的世界玩家社区',
@@ -96,7 +96,7 @@ const slides = [
     },
   },
   {
-    image: '/src/assets/bg2.jpg',
+    image: '/bg2.jpg',
     alt: '我的世界游戏截图',
     title: '发现精彩服务器',
     description: '从生存到创造，从迷你游戏到大型RPG，找到适合你的服务器',
@@ -113,7 +113,7 @@ const slides = [
     },
   },
   {
-    image: '/src/assets/bg3.png',
+    image: '/bg3.png',
     alt: '我的世界建筑展示',
     title: '探索无限可能',
     description: '在恒星MC社区，每个玩家都能创造属于自己的精彩世界',

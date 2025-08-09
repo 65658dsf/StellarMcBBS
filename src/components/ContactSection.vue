@@ -17,7 +17,7 @@
             <div
               class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4"
             >
-              <img src="@/assets/QQ.svg" alt="QQ群" class="w-8 h-8" />
+              <img src="./QQ.svg" alt="QQ群" class="w-8 h-8" />
             </div>
             <h3 class="text-lg font-semibold text-dark mb-2">官方QQ群</h3>
             <p class="text-dark-2 text-sm mb-4">加入我们的官方QQ群，与更多玩家交流</p>
@@ -37,7 +37,7 @@
             <div
               class="w-16 h-16 rounded-full bg-danger/10 flex items-center justify-center mx-auto mb-4"
             >
-              <img src="@/assets/bilibili.svg" alt="哔哩哔哩" class="w-8 h-8" />
+              <img src="./bilibili.svg" alt="哔哩哔哩" class="w-8 h-8" />
             </div>
             <h3 class="text-lg font-semibold text-dark mb-2">哔哩哔哩</h3>
             <p class="text-dark-2 text-sm mb-4">关注我们的哔哩哔哩账号，获取最新动态</p>

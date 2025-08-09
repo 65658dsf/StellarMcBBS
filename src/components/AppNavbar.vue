@@ -2,7 +2,7 @@
   <header id="navbar" class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300">
     <nav class="w-full px-4 py-3 flex items-center justify-between bg-white text-black shadow-lg">
       <div class="flex items-center space-x-2">
-        <img src="@/assets/favicon.ico" alt="恒星MC社区Logo" class="w-10 h-10 rounded-lg" />
+         <img src="/favicon.ico" alt="恒星MC社区Logo" class="w-10 h-10 rounded-lg" />
         <h1 class="text-xl font-bold tracking-tight">恒星MC社区</h1>
       </div>
 
